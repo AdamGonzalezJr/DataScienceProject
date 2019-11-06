@@ -1,0 +1,172 @@
+---
+title: "Statistics Of Crime Within the United States "
+subtitle: "Adam's Data Science Project" #replace blank with your name
+output:
+  html_document:
+    df_print: paged
+---
+
+Statistics Of Crime Within the United States is about crime per state and how they compare to others within the united states. Not only do i want to display which place is the worse, but i also want to display the decrement or increment in crime over the years. Which is what i plan to display during this project. To me crime is an important topic that we should be seeking more intel on, becuase it happens everywhere and its constantly happening.
+
+first i will upload the data for the data tidying to display it a little better and clean it up.
+the way i will do this is call library tidyverse, and then i will load in the data from github.
+
+The two datasets that i will be uploading is crime per state but also i will post data about fire arm mortality to play in to see if more the more crime in certain state meant that there was more fire arm mortalitys
+```{r}
+
+library("tidyverse")
+
+#fire arm table for data by state for firearm mortality
+FireArm <- read_csv("https://raw.githubusercontent.com/introdsci/DataScience-AdamGonzalezJr/master/Firearm%20Mortality%20by%20State.csv")
+
+#Crime per state for the past 40 years
+Crime <- read.csv("https://raw.githubusercontent.com/introdsci/DataScience-AdamGonzalezJr/master/ucr_crime_1975_2015.csv")
+
+```
+
+Next i want to clean up the data that is in the tables by changing some of the names first so it makes more sense for the user to see what the data is about, and it makes it easier to follow. So i will go through each table and change the value of each column
+
+```{r}
+
+library("data.table")
+#two different ways of setting the new column names
+old = c("ORI", "year", "department_name", "total_pop")
+new = c("police_identifier", "year_of_crime", "state", "population")
+setnames(Crime, old, new)
+
+#setting the column names a different way for the rest of them 
+setnames(Crime, old = c("homs_sum", "rape_sum", "rob_sum", "agg_ass_sum") , new = c("homicide_total", "rape_total", "robbery_total", "aggrivated_assault_total"))
+
+
+#settings names in the FireArm data tables
+setnames(FireArm, old = c("YEAR", "STATE", "RATE", "DEATHS"), new = c("year_of_data", "state_of_shootings", "rate_per_month", "deaths_per_year"))
+
+```
+
+Deleting the last two columns in the Crime table since they are not relevent to our data, and provide no information.
+
+```{r}
+
+#this selects the coloumns from the data table and removes them
+select(Crime, -c("source", "url"))
+
+```
+
+
+creating two new tables. One table that holds the values of FireArms Death per Month
+
+```{r}
+
+#creating a new table and that holds the value of deaths per month
+FireArmDeathsPerMonth <- tibble(year_of_data = FireArm$year_of_data, state_of_shootings = FireArm$state_of_shootings, rate_per_month = FireArm$rate_per_month)
+
+#creating a new table that has deaths per year
+FireArmDeathsPerYear <- tibble(year_of_data = FireArm$year_of_data, state_of_shootings = FireArm$state_of_shootings, rate_per_year = FireArm$deaths_per_year)
+```
+
+
+Here i create 5 seperate tables for homicide, rape, robbery, aggrivated_assault, violentcrimes. This way for a later on i can up some data together and see if i can answer some of the questions that i have been wanting to ask which i will discuss after. Putting this data allows me to seperate them by crime that way i can see the data better and see them solo. 
+```{r}
+homicide <- tibble(year_of_homicide = Crime$year_of_crime, state_of_homicide = Crime$state, total_homicides = Crime$homicide_total)
+rape <- tibble(year_of_rape = Crime$year_of_crime, state_of_rape = Crime$state, rape_total = Crime$rape_total)
+robbery <- tibble(year_of_robbery = Crime$year_of_crime, state_of_robbery = Crime$state, robbery_total = Crime$robbery_total)
+aggrivated_assault <- tibble(year_of_assaults = Crime$year_of_crime, state_of_assaults = Crime$state, assault_total = Crime$aggrivated_assault_total)
+violentcrimes <- tibble(year_of_violent_crimes = Crime$year_of_crime, state_of_violent_crimes = Crime$state, violent_crime_total = Crime$violent_crime)
+
+```
+
+Documentation Of Variables
+<p>
+For the Crime Table
+</p>
+<p>
+-------------------
+</p>
+<p>
+Police_Identifer - Is used apart of this data because it allows the police to identify which place they are talking about
+<p>
+Year_of_crime - allows people to see what year these crimes took place
+</p>
+<p>
+state - allows people to see what state these crimes took place in and the year_of_crime allows the people to see the year and state that these crimes were commited
+</p>
+<p>
+population - allows the viewer to see on that given year what was the population of the given state
+</p>
+<p>
+homicide_total - allows the viewer to see the total number of homicides for that given year and state
+</p>
+<p>
+rape_total - allows the viewer to see the total number of victims that were raped for that given year and state
+</p>
+<p>
+robbery_total - allows the viewer to see the total number of robberies commited for that given year and state
+</p>
+<p>
+aggrivated_assault_total - allows the viewer to see the total number of aggrivated assaults for that given year and state
+</p>
+<p>
+violent_crimes - allows the viewer to see the total number of violent crimes commited for that given year and state
+</p>
+<p>
+violent_per_100k - allows the viewer to see the rate per 100k of violent crimes per year are commited so out of every 100k people what are the chances.
+</p>
+<p>
+homs_per_100k - allows the viewer to see the rate per 100k of homicide crimes per year are commited so out of every 100k people what are the chances.
+</p>
+<p>
+rape_per_100k - allows the viewer to see the rate per 100k of rape crimes per year are commited so out of every 100k people what are the chances.
+</p>
+<p>
+rob_per_100k - allows the viewer to see the rate per 100k of robbery crimes per year are commited so out of every 100k people what are the chances.
+</p>
+<p>
+ass_ass_per_100k - allows the viewer to see the rate per 100k of aggrivated assaults crimes per year are commited so out of every 100k people what are the chances.
+</p>
+<p>
+-----------------------
+</p>
+<p>
+
+For the FireArm Table
+</p>
+<p>
+----------------------
+</p>
+<p>
+year_of_date - Year the shooting data was conducted
+</p>
+<p>
+state_of_shootings - State of the shootings
+</p>
+<p>
+rate_per_month - rate per month a shooting incident occured
+</p>
+<p>
+deaths_per_year - deaths for the year related from shooting 
+</p>
+<p>
+url - were the data is from
+</p>
+<p>
+
+
+------------------------
+</p>
+this plot can show that i need to find more data to fill in the missing years, but it shows that as the years go shooting deaths increase.
+```{r}
+ggplot(FireArm, aes(x=year_of_data, y = deaths_per_year)) + geom_col(bandwidth = 1)
+```
+
+this plot shows that it has a slight increase for the given crimes at different times my goal is to gather more data and see if it is continously increasing
+```{r}
+ggplot(Crime, aes(x=year_of_crime, y = homicide_total)) + geom_col(color = 'red')
+ggplot(Crime, aes(x=year_of_crime, y = rape_total)) + geom_col(color = 'blue')
+ggplot(Crime, aes(x=year_of_crime, y = robbery_total)) + geom_col(color = 'green')
+ggplot(Crime, aes(x=year_of_crime, y = aggrivated_assault_total)) + geom_col(color = 'pink')
+ggplot(Crime, aes(x=year_of_crime, y = violent_crime)) + geom_col(color = 'yellow')
+```
+
+
+
+For this project my main focus is to see if crime continues to increase over time and then to compare it to shootings and see if shootings are more prevalent then the the 4 other major crimes that our in my data set. I want to be able to figure out if there is spikes in certain years that more crimes are commited or if there is a track record for crimes that keep increasing.
