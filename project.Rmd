@@ -219,10 +219,29 @@ crime_Per_State <- as.data.frame(result)
 print(crime_Per_State)
 ```
 
+
+Here i Show per state what states are above the poverty line by percentage which shows that alot of states population is above the poverty line i think for further data analysis i can grab data per city where there is the most crime occured and compare that to if a city its self is above the poverty line which would be better analysis for seeing if certain places that are in more poverty have more crimes commited 
+which would be really interesting to see
 ```{r}
+People <- read_csv("https://raw.githubusercontent.com/AdamGonzalezJr/DataScienceProject/master/data(1).csv")
+
+old = c("Percent Educational Attainment", "Percent Peace Index", "Percent Above Poverty Rate", "Percent Non-religious")
+new = c("Educational_Attainment", "Peace_Index", "Above_Poverty_Rate", "Non_religious")
+setnames(People, old, new)
+g = ggplot(People, aes(x=State, y = Above_Poverty_Rate)) + geom_col(color = 'red', width = .5)
+g + coord_flip()
+```
+
+Next i want to see per state does it have a higher educational attainment than other states and then my graphs from early can show based on the information provided do states that have more poverty and less educational attainment have higher crime rates, and more extreme crimes commited.
+
+```{r}
+
+a = ggplot(People, aes(x = State, y = Educational_Attainment)) + geom_col(color = 'blue', width = .5)
+a + coord_flip()
 
 ```
 
 
+In the graph you can see that in the united states educational attainment is not really high so it goes to show does education have an impact in crimes. We do lead most incarcerated people in the world which makes you wonder why america leads in that column. Alot of crimes are commited my goal is to gain more information based off city stats so i can see is it certain citys in certain states that lead the crime rate and make this jump to making that state have a higher crime rate or is it that overall the state just has tons of crimes that are committed more and more every year. Thats my goal for this project i find it really interesting to learn about this, becauase it makes me dig in and learn more and more. The biggest suprise was educational attainment every state is less than 40% which shows basically how much education each person has attained which is extermely unbeliveable.
 
-For this project my main focus is to see if crime continues to increase over time and then to compare it to shootings and see if shootings are more prevalent then the the 4 other major crimes that our in my data set. I want to be able to figure out if there is spikes in certain years that more crimes are commited or if there is a track record for crimes that keep increasing.
+
