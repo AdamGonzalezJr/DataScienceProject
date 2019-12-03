@@ -12,10 +12,19 @@ first i will upload the data for the data tidying to display it a little better 
 the way i will do this is call library tidyverse, and then i will load in the data from github.
 
 The two datasets that i will be uploading is crime per state but also i will post data about fire arm mortality to play in to see if more the more crime in certain state meant that there was more fire arm mortalitys
-```{r}
+```{r, results='hide', message=FALSE}
+include <- function(library_name){
+  if( !(library_name %in% installed.packages()) )
+    install.packages(library_name)
+  library(library_name, character.only = TRUE)
+}
 
-library("tidyverse")
-
+include("rvest")
+include("tidyr")
+include("tidyverse")
+include("stringr")
+include("data.table")
+include("rjson")
 #fire arm table for data by state for firearm mortality
 FireArm <- read_csv("https://raw.githubusercontent.com/introdsci/DataScience-AdamGonzalezJr/master/Firearm%20Mortality%20by%20State.csv")
 
@@ -28,7 +37,6 @@ Next i want to clean up the data that is in the tables by changing some of the n
 
 ```{r}
 
-library("data.table")
 #two different ways of setting the new column names
 old = c("ORI", "year", "department_name", "total_pop")
 new = c("police_identifier", "year_of_crime", "state", "population")
@@ -156,6 +164,7 @@ url - were the data is from
 this plot can show that i need to find more data to fill in the missing years, but it shows that as the years go shooting deaths increase.
 ```{r}
 ggplot(FireArm, aes(x=year_of_data, y = deaths_per_year)) + geom_col(bandwidth = 1)
+
 ```
 
 this plot shows that it has a slight increase for the given crimes at different times my goal is to gather more data and see if it is continously increasing
@@ -165,6 +174,53 @@ ggplot(Crime, aes(x=year_of_crime, y = rape_total)) + geom_col(color = 'blue')
 ggplot(Crime, aes(x=year_of_crime, y = robbery_total)) + geom_col(color = 'green')
 ggplot(Crime, aes(x=year_of_crime, y = aggrivated_assault_total)) + geom_col(color = 'pink')
 ggplot(Crime, aes(x=year_of_crime, y = violent_crime)) + geom_col(color = 'yellow')
+```
+
+
+Next I will be focusing on web scrapping more information for data analysis. I will grab information from various websites that shed more insight on crimes happening between the age range of 10-17, by year and ammounts. So the data table shows the year and the crims commited 
+
+```{r}
+web_scraper <- function(url){
+  
+    webpage <- read_html(url)
+    
+    table <- webpage %>% html_nodes("table")
+    
+    year <-            table %>%
+                       html_nodes("td.cellleft") %>%
+                       html_text() %>%
+                       as.integer()
+    
+    ammount <-         table %>%
+                       html_nodes("td.cellright") %>%
+                       html_text()
+    
+
+    
+        
+    Juvenile_arrest <- tibble(
+                            Year = year,
+                            Ammount = ammount,
+                            )
+
+}
+
+Arrests = web_scraper("https://www.ojjdp.gov/ojstatbb/crime/JAR_Display.asp?ID=qa05200&selOffenses=1&text=yes")
+print(Arrests)
+```
+
+Here Shows data of crime per state which shows homicide per state that ties in with my earlier data that shows information about crimes per year, and since i did that i wanted to show extreme crimes such as homicide and firearm killings per state which helps shed light on what states have the highest chance of having a higher chance of death by homicide or firearm.
+```{r}
+
+result <- fromJSON(file = "data.json")
+
+crime_Per_State <- as.data.frame(result)
+
+print(crime_Per_State)
+```
+
+```{r}
+
 ```
 
 
