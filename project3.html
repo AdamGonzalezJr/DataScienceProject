@@ -540,17 +540,17 @@ summary(train_model)</code></pre>
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -5.7698 -1.3940  0.1527  1.3809  5.2228 
+## -5.8281 -1.0170  0.0786  1.0511  5.2855 
 ## 
 ## Coefficients:
 ##               Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  1.732e+00  4.549e+00   0.381    0.707
-## povertyRate  5.937e-01  3.958e-01   1.500    0.148
-## population  -1.423e-08  8.774e-08  -0.162    0.873
+## (Intercept)  1.012e+00  4.367e+00   0.232    0.819
+## povertyRate  6.544e-01  3.823e-01   1.711    0.102
+## population  -1.744e-08  8.617e-08  -0.202    0.842
 ## 
-## Residual standard error: 3.039 on 21 degrees of freedom
-## Multiple R-squared:  0.105,  Adjusted R-squared:  0.01974 
-## F-statistic: 1.232 on 2 and 21 DF,  p-value: 0.3121</code></pre>
+## Residual standard error: 3.022 on 21 degrees of freedom
+## Multiple R-squared:  0.1308, Adjusted R-squared:  0.048 
+## F-statistic:  1.58 on 2 and 21 DF,  p-value: 0.2295</code></pre>
 <ul>
 <li>Now that we did the testing we can see that the p-values are really low</li>
 <li>we can now tell that the more population there is with a high poverty rate there is lower ammounts of crime</li>
@@ -563,13 +563,13 @@ RMSE = RMSE(predictions, test$KillsPerMonth)
 MAE = MAE(predictions, test$KillsPerMonth)
 
 cat(&quot;Predictions: &quot;, predictions)</code></pre>
-<pre><code>## Predictions:  7.72142 10.0643 7.820499 10.17189 10.17557 9.084106 8.748446</code></pre>
+<pre><code>## Predictions:  9.431748 10.12953 8.541465 10.18474 10.27913 8.059387 8.139974</code></pre>
 <pre class="r"><code>cat(&quot;\nRMSE: &quot;, RMSE)</code></pre>
 <pre><code>## 
-## RMSE:  2.462351</code></pre>
+## RMSE:  2.527302</code></pre>
 <pre class="r"><code>cat(&quot;\nMAE:  &quot;, MAE)</code></pre>
 <pre><code>## 
-## MAE:   1.913217</code></pre>
+## MAE:   2.202665</code></pre>
 <p>** After putting together my data i can see that poverty does not play a role in homicides per month like i thought it would + My data showed me that those factors dont play that big of a roll + Another thing to add might be that the population plays a big roll</p>
 <ul>
 <li>This is something that i want to continue working on and breaking it down even more i want to see based on smaller areas</li>
