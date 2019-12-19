@@ -1,0 +1,20 @@
+---
+title: "Crime Data In The United States"
+authour: "Adam Gonzalez"
+date: '12/19/2019'
+output: html_document
+---
+
+
+## Abstract
+My Project is about crimes comitted within the united states I put together some data to see how much crime is really committed throughout the states. Also included is data on poverty and education to see some stats on per state how much crime is commited, and with that state in mind how much poverty and education play a factor in on crimes committed
+
+
+## 1 . Discovery and data preperation
+Beggining of project one gathering data, and cleaning it [Project 1](project.html)
+
+## 2 . Gathering more data using different methods
+Gathering more data using web scrapping and using json methods to use for the project [Project 2](project2.html)
+
+## 3 . Results and modeling
+Final phase using models to test things you wanted to answer throughout your project adn cleaning up other parts of the project [Project3](project3.html)
