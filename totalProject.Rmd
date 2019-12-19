@@ -10,3 +10,6 @@ My Project is about crimes comitted within the united states I put together some
 
 * Project two data on education and poverty
 [Project 2](project2.html)
+
+* Project three adding more data and creating models
+[Project3](project3.html)
