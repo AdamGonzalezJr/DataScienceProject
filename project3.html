@@ -540,17 +540,19 @@ summary(train_model)</code></pre>
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -5.8281 -1.0170  0.0786  1.0511  5.2855 
+## -6.1049 -1.2359 -0.0627  1.8956  5.6614 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  1.012e+00  4.367e+00   0.232    0.819
-## povertyRate  6.544e-01  3.823e-01   1.711    0.102
-## population  -1.744e-08  8.617e-08  -0.202    0.842
+##               Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept) -2.946e+00  4.196e+00  -0.702   0.4903  
+## povertyRate  9.858e-01  3.652e-01   2.700   0.0134 *
+## population  -5.326e-08  8.126e-08  -0.655   0.5193  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 3.022 on 21 degrees of freedom
-## Multiple R-squared:  0.1308, Adjusted R-squared:  0.048 
-## F-statistic:  1.58 on 2 and 21 DF,  p-value: 0.2295</code></pre>
+## Residual standard error: 2.815 on 21 degrees of freedom
+## Multiple R-squared:  0.2668, Adjusted R-squared:  0.197 
+## F-statistic: 3.821 on 2 and 21 DF,  p-value: 0.03843</code></pre>
 <ul>
 <li>Now that we did the testing we can see that the p-values are really low</li>
 <li>we can now tell that the more population there is with a high poverty rate there is lower ammounts of crime</li>
@@ -563,19 +565,23 @@ RMSE = RMSE(predictions, test$KillsPerMonth)
 MAE = MAE(predictions, test$KillsPerMonth)
 
 cat(&quot;Predictions: &quot;, predictions)</code></pre>
-<pre><code>## Predictions:  9.431748 10.12953 8.541465 10.18474 10.27913 8.059387 8.139974</code></pre>
+<pre><code>## Predictions:  7.864611 8.626413 8.313428 6.06029 10.48109 11.22264 8.491946</code></pre>
 <pre class="r"><code>cat(&quot;\nRMSE: &quot;, RMSE)</code></pre>
 <pre><code>## 
-## RMSE:  2.527302</code></pre>
+## RMSE:  3.335958</code></pre>
 <pre class="r"><code>cat(&quot;\nMAE:  &quot;, MAE)</code></pre>
 <pre><code>## 
-## MAE:   2.202665</code></pre>
+## MAE:   2.481985</code></pre>
 <p>** After putting together my data i can see that poverty does not play a role in homicides per month like i thought it would + My data showed me that those factors dont play that big of a roll + Another thing to add might be that the population plays a big roll</p>
 <ul>
 <li>This is something that i want to continue working on and breaking it down even more i want to see based on smaller areas</li>
 <li><p>next step will be to get city and town information on homicide and poverty rate on those locations</p></li>
 <li><p>More testing will be needed to further conclude if poverty plays a roll in more homicides, becuase as of right now it does not seem like it plays a big roll</p></li>
 </ul>
+</div>
+<div id="what-can-be-done-next" class="section level2">
+<h2>What can be done next</h2>
+<p>I think with this data i can continue to grow it and make it better. I can find better sources with more information and make sure to gather more stats. I feel like this is a big topic in the world and if we keep researching we might be able to make a difference in the world if we can figure out what leads to violence and killings</p>
 <p><a href="project2.html">Go To Previous Phase</a></p>
 </div>
 </div>

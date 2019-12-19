@@ -7,6 +7,8 @@ output: html_document
 
 [Back To Portfolio](index.html)
 
+
+
 ## ** Gun Violence in todays society and how poverty plays a role
 
 In previous parts of the projects i was putting together more stats and more data, but did not show a modeling of the data that i had gathered so now i will put together a model to show how poverty plays a role in gun violence.
@@ -122,3 +124,11 @@ cat("\nMAE:  ", MAE)
 + next step will be to get city and town information on homicide and poverty rate on those locations
 
 * More testing will be needed to further conclude if poverty plays a roll in more homicides, becuase as of right now it does not seem like it plays a big roll
+
+
+
+## What can be done next
+
+I think with this data i can continue to grow it and make it better. I can find better sources with more information and make sure to gather more stats. I feel like this is a big topic in the world and if we keep researching we might be able to make a difference in the world if we can figure out what leads to violence and killings
+
+[Go To Previous Phase](project2.html)
