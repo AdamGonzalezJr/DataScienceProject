@@ -1,0 +1,12 @@
+---
+title: "Crime Data In The United States"
+output: html_document
+---
+My Project is about crimes comitted within the united states I put together some data to see how much crime is really committed throughout the states. Also included is data on poverty and education to see some stats on per state how much crime is commited, and with that state in mind how much poverty and education play a factor in on crimes committed
+
+* Project one data on crimes per state and other stats
+[Project 1](project.html)
+
+
+* Project two data on education and poverty
+[Project 2](project2.html)
