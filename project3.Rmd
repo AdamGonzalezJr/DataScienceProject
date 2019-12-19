@@ -1,0 +1,111 @@
+---
+title: "project3"
+author: "Adam Gonzalez"
+date: "12/18/2019"
+output: html_document
+---
+
+[Back To Portfolio]()
+
+## ** Gun Violence in todays society and how poverty plays a role
+
+In previous parts of the projects i was putting together more stats and more data, but did not show a modeling of the data that i had gathered so now i will put together a model to show how poverty plays a role in gun violence.
+
+```{r results='hide'}
+
+library('knitr')
+
+if (!file.exists('project2.r')){
+  purl('project2.Rmd', output='project2.r')
+}
+
+if(!file.exists('project1.r')){
+  purl('project.Rmd', output='project1.r')
+}
+
+source('project1.r')
+source('project2.r')
+library(caret)
+```
+
+### Gun Violence Data
+
+```{r}
+
+FireArm
+
+```
+
+### Poverty Data
+
+```{r}
+poverty <- tibble(state = People$State, abovePoverty = People$Above_Poverty_Rate)
+
+poverty
+```
+
+# Adding new poverty data for testing to have more data
+```{r}
+poverty2.0 <- read_csv("data.csv")
+poverty2.0
+
+povertyUpdate <- poverty2.0[order(poverty2.0$State),]
+povertyUpdate = povertyUpdate[-9,]
+```
+
+
+```{r}
+# new firearm data to include in calculations
+FireArm2.0 <- read_csv("data1.csv")
+FireArmUpdate <- FireArm2.0[order(FireArm2.0$State),]
+```
+
+## ** Plotting together the data of shootings and poverty
+
+```{r}
+fireArmPov <- tibble(State = FireArm2.0$State, KillsPerMonth = FireArmUpdate$rate, 
+                     povertyRate = povertyUpdate$PovertyRate, population = povertyUpdate$Population)
+
+fireArmPov = filter(fireArmPov, povertyRate < 15)
+fireArmPov = filter(fireArmPov, KillsPerMonth < 15)
+fireArmPov = filter(fireArmPov, KillsPerMonth != povertyRate)
+a = ggplot(fireArmPov, aes(x = State, y = KillsPerMonth)) + geom_col(color = 'blue', width = 1)
+
+a + coord_flip()
+
+
+b = ggplot(fireArmPov, aes(x = State, y = povertyRate)) + geom_col(color = 'Yellow', width = 1)
+
+
+b + coord_flip()
+
+```
+
+
+
+
+## setting up the model
+
+
+```{r}
+#Partition into Train(75%) and Test(25%) sets
+sample <- createDataPartition(fireArmPov$KillsPerMonth, p=0.75, list=FALSE)
+train <- fireArmPov[sample, ]
+test <- fireArmPov[-sample, ]
+
+train_model <- lm(KillsPerMonth ~ povertyRate + population, data = train)
+
+summary(train_model)
+```
+* Now that we did the testing we can see that the p-values are really low
++ we can now tell that the more population there is with a high poverty rate there is lower ammounts of crime
+* It was interesting to see since i thought the more poverty and population the more homicides there would be within each state with a higher poverty rate
+
+
+* Now We can go more in depth and try to look at the predicitions and see if they show anything else more into this talk about if poverty plays a roll
+```{r}
+predictions <- train_model %>% predict(test)
+
+
+
+```
