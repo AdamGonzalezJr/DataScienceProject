@@ -1,0 +1,88 @@
+---
+title: "project2"
+output: html_document
+---
+
+```{r, results='hide', message=FALSE}
+include <- function(library_name){
+  if( !(library_name %in% installed.packages()) )
+    install.packages(library_name)
+  library(library_name, character.only = TRUE)
+}
+
+include("rvest")
+include("tidyr")
+include("tidyverse")
+include("stringr")
+include("data.table")
+include("rjson")
+#fire arm table for data by state for firearm mortality
+```
+
+
+Next I will be focusing on web scrapping more information for data analysis. I will grab information from various websites that shed more insight on crimes happening between the age range of 10-17, by year and ammounts. So the data table shows the year and the crims commited 
+
+```{r}
+web_scraper <- function(url){
+  
+    webpage <- read_html(url)
+    
+    table <- webpage %>% html_nodes("table")
+    
+    year <-            table %>%
+                       html_nodes("td.cellleft") %>%
+                       html_text() %>%
+                       as.integer()
+    
+    ammount <-         table %>%
+                       html_nodes("td.cellright") %>%
+                       html_text()
+    
+
+    
+        
+    Juvenile_arrest <- tibble(
+                            Year = year,
+                            Ammount = ammount,
+                            )
+
+}
+
+Arrests = web_scraper("https://www.ojjdp.gov/ojstatbb/crime/JAR_Display.asp?ID=qa05200&selOffenses=1&text=yes")
+head(Arrests)
+```
+
+Here Shows data of crime per state which shows homicide per state that ties in with my earlier data that shows information about crimes per year, and since i did that i wanted to show extreme crimes such as homicide and firearm killings per state which helps shed light on what states have the highest chance of having a higher chance of death by homicide or firearm.
+```{r}
+
+result <- fromJSON(file = "data.json")
+
+crime_Per_State <- as.data.frame(result)
+
+head(crime_Per_State)
+```
+
+
+Here i Show per state what states are above the poverty line by percentage which shows that alot of states population is above the poverty line i think for further data analysis i can grab data per city where there is the most crime occured and compare that to if a city its self is above the poverty line which would be better analysis for seeing if certain places that are in more poverty have more crimes commited 
+which would be really interesting to see
+```{r}
+People <- read_csv("https://raw.githubusercontent.com/AdamGonzalezJr/DataScienceProject/master/data(1).csv")
+
+old = c("Percent Educational Attainment", "Percent Peace Index", "Percent Above Poverty Rate", "Percent Non-religious")
+new = c("Educational_Attainment", "Peace_Index", "Above_Poverty_Rate", "Non_religious")
+setnames(People, old, new)
+g = ggplot(People, aes(x=State, y = Above_Poverty_Rate)) + geom_col(color = 'red', width = .5)
+g + coord_flip()
+```
+
+Next i want to see per state does it have a higher educational attainment than other states and then my graphs from early can show based on the information provided do states that have more poverty and less educational attainment have higher crime rates, and more extreme crimes commited.
+
+```{r}
+
+a = ggplot(People, aes(x = State, y = Educational_Attainment)) + geom_col(color = 'blue', width = .5)
+a + coord_flip()
+
+```
+
+
+In the graph you can see that in the united states educational attainment is not really high so it goes to show does education have an impact in crimes. We do lead most incarcerated people in the world which makes you wonder why america leads in that column. Alot of crimes are commited my goal is to gain more information based off city stats so i can see is it certain citys in certain states that lead the crime rate and make this jump to making that state have a higher crime rate or is it that overall the state just has tons of crimes that are committed more and more every year. Thats my goal for this project i find it really interesting to learn about this, becauase it makes me dig in and learn more and more. The biggest suprise was educational attainment every state is less than 40% which shows basically how much education each person has attained which is extermely unbeliveable.
