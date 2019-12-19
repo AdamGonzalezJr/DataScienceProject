@@ -5,7 +5,7 @@ date: "12/18/2019"
 output: html_document
 ---
 
-[Back To Portfolio]()
+[Back To Portfolio](index.html)
 
 ## ** Gun Violence in todays society and how poverty plays a role
 
@@ -106,6 +106,19 @@ summary(train_model)
 ```{r}
 predictions <- train_model %>% predict(test)
 
+RMSE = RMSE(predictions, test$KillsPerMonth)
+MAE = MAE(predictions, test$KillsPerMonth)
 
-
+cat("Predictions: ", predictions)
+cat("\nRMSE: ", RMSE)
+cat("\nMAE:  ", MAE)
 ```
+
+** After putting together my data i can see that poverty does not play a role in homicides per month like i thought it would
++ My data showed me that those factors dont play that big of a roll
++ Another thing to add might be that the population plays a big roll
+
+* This is something that i want to continue working on and breaking it down even more i want to see based on smaller areas
++ next step will be to get city and town information on homicide and poverty rate on those locations
+
+* More testing will be needed to further conclude if poverty plays a roll in more homicides, becuase as of right now it does not seem like it plays a big roll
