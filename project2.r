@@ -12,7 +12,7 @@ include("stringr")
 include("data.table")
 include("rjson")
 #fire arm table for data by state for firearm mortality
-
+#tryning
 
 ## ------------------------------------------------------------------------
 web_scraper <- function(url){
