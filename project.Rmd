@@ -6,6 +6,8 @@ output:
     df_print: paged
 ---
 
+[Back To Portfolio](index.html)
+
 Statistics Of Crime Within the United States is about crime per state and how they compare to others within the united states. Not only do i want to display which place is the worse, but i also want to display the decrement or increment in crime over the years. Which is what i plan to display during this project. To me crime is an important topic that we should be seeking more intel on, becuase it happens everywhere and its constantly happening.
 
 first i will upload the data for the data tidying to display it a little better and clean it up.
@@ -178,3 +180,4 @@ ggplot(Crime, aes(x=year_of_crime, y = violent_crime)) + geom_col(color = 'yello
 
 
 
+[Go To Next Phase](project2.html)

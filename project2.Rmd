@@ -2,6 +2,9 @@
 title: "project2"
 output: html_document
 ---
+[Back To Portfolio](index.html)
+[Go To Previous Phase](project.html)
+
 
 ```{r, results='hide', message=FALSE}
 include <- function(library_name){
@@ -86,3 +89,7 @@ a + coord_flip()
 
 
 In the graph you can see that in the united states educational attainment is not really high so it goes to show does education have an impact in crimes. We do lead most incarcerated people in the world which makes you wonder why america leads in that column. Alot of crimes are commited my goal is to gain more information based off city stats so i can see is it certain citys in certain states that lead the crime rate and make this jump to making that state have a higher crime rate or is it that overall the state just has tons of crimes that are committed more and more every year. Thats my goal for this project i find it really interesting to learn about this, becauase it makes me dig in and learn more and more. The biggest suprise was educational attainment every state is less than 40% which shows basically how much education each person has attained which is extermely unbeliveable.
+
+
+
+[Go To Next Phase](project3.html)
