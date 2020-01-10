@@ -50,7 +50,7 @@ FireArmDeathsPerMonth <- tibble(year_of_data = FireArm$year_of_data, state_of_sh
 #creating a new table that has deaths per year
 FireArmDeathsPerYear <- tibble(year_of_data = FireArm$year_of_data, state_of_shootings = FireArm$state_of_shootings, rate_per_year = FireArm$deaths_per_year)
 
-
+## just testing to see 
 ## ------------------------------------------------------------------------
 homicide <- tibble(year_of_homicide = Crime$year_of_crime, state_of_homicide = Crime$state, total_homicides = Crime$homicide_total)
 rape <- tibble(year_of_rape = Crime$year_of_crime, state_of_rape = Crime$state, rape_total = Crime$rape_total)
